@@ -1,4 +1,4 @@
-# React Playground
+# CODE-CRAFT-AI
 
 A modern, full-stack AI-powered code playground for building, previewing, and exporting React components and HTML/JS code.  
 Built with Next.js, React, Node.js, MongoDB, and OpenRouter LLM API.
@@ -155,6 +155,17 @@ You can easily switch between models by modifying the `model` parameter in the b
 6.  **Generate Code:** Send the prompt to the AI assistant. The generated code will appear in the chat.
 7.  **Preview and Edit:** The code will be automatically rendered in the live preview area. You can copy the code to your clipboard using the "Copy" button.
 8.  **Manage Sessions:** Save, load, or delete your coding sessions
+
+##  Troubleshooting
+
+If you do not see no response for prompt too many times maybe the free token limit of openrouter has expired usethe following credentials for the resulst that were already generated.
+
+To test the app or for reference, you can use the following user credentials:
+
+- **Email:** `ratul.9paul@gmail.com`
+- **Password:** `Broski@22`
+
+If you continue to have issues, try logging out and logging in again with
 
 ## 👤 Author
 
