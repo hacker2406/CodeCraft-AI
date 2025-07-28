@@ -5,6 +5,9 @@ import ChatPanel from "@/components/ChatPanel";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+// 👇 Add this line at the top
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
 export default function SessionsPage() {
   const router = useRouter();
   const [activeSession, setActiveSession] = useState(null);
@@ -29,7 +32,7 @@ export default function SessionsPage() {
   const handleSelect = (session) => {
     localStorage.setItem("lastSessionId", session._id);
     const token = localStorage.getItem("token");
-    fetch(`http://localhost:5000/api/sessions/${session._id}`, {
+    fetch(`${API_BASE_URL}/api/sessions/${session._id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -52,7 +55,7 @@ export default function SessionsPage() {
 
   const handleCreateSession = async (name) => {
     const token = localStorage.getItem("token");
-    const res = await fetch("http://localhost:5000/api/sessions", {
+    const res = await fetch(`${API_BASE_URL}/api/sessions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +77,7 @@ export default function SessionsPage() {
 
   const handleDelete = async (id) => {
     const token = localStorage.getItem("token");
-    await fetch(`http://localhost:5000/api/sessions/${id}`, {
+    await fetch(`${API_BASE_URL}/api/sessions/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -94,7 +97,7 @@ export default function SessionsPage() {
     setMessages((prev) => [...prev, userMsg, thinkingMsg]);
 
     const token = localStorage.getItem("token");
-    const res = await fetch("http://localhost:5000/api/ai/chat", {
+    const res = await fetch(`${API_BASE_URL}/api/ai/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -127,7 +130,7 @@ export default function SessionsPage() {
     const lastSessionId = localStorage.getItem("lastSessionId");
     const token = localStorage.getItem("token");
     if (lastSessionId && token) {
-      fetch("http://localhost:5000/api/sessions", {
+      fetch(`${API_BASE_URL}/api/sessions`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())

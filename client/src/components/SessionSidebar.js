@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
 export default function SessionSidebar({ activeSessionId, onSelect, onCreate, onDelete, refetchKey }) {
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -8,7 +10,7 @@ export default function SessionSidebar({ activeSessionId, onSelect, onCreate, on
   // Logout handler
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:5000/api/auth/logout", { method: "POST", credentials: "include" });
+      await fetch(`${API_BASE_URL}/api/auth/logout`, { method: "POST", credentials: "include" });
       localStorage.removeItem("token");
       window.location.href = "/login";
     } catch (err) {
@@ -19,7 +21,7 @@ export default function SessionSidebar({ activeSessionId, onSelect, onCreate, on
   // Fetch sessions on mount
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch("http://localhost:5000/api/sessions", {
+    fetch(`${API_BASE_URL}/api/sessions`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(async res => {

@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
@@ -17,7 +19,7 @@ export default function Login() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -77,7 +79,7 @@ export default function Login() {
           <div className="flex-grow h-px bg-gray-400" />
         </div>
         <a
-          href="http://localhost:5000/api/auth/google"
+          href={`${API_BASE_URL}/api/auth/google`}
           className="w-full flex items-center justify-center gap-2 bg-black border border-gray-400 py-3 rounded-lg font-semibold text-gray-200 hover:bg-gray-900 transition shadow-md"
         >
           <svg className="w-5 h-5" viewBox="0 0 48 48">
