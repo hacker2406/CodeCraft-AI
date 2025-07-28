@@ -20,7 +20,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://code-craft-ai-zeta.vercel.app/"
+      "https://code-craft-ai-zeta.vercel.app"
     ], 
     credentials: true,
   })
