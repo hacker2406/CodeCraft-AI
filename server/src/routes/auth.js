@@ -4,6 +4,7 @@ import passport from "../config/passport.js";
 import jwt from "jsonwebtoken";
 
 const router = express.Router();
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 
 // Email/password routes
 router.post("/signup", signup);
@@ -24,7 +25,7 @@ router.get(
       { expiresIn: "7d" }
     );
     // Redirect to frontend with token as query param
-    res.redirect(`http://localhost:3000/session?token=${token}`);
+    res.redirect(`${FRONTEND_URL}/session?token=${token}`);
   }
 );
 
