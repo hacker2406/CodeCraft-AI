@@ -5,12 +5,21 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import User from "../models/User.js";
 
+console.log("--- PASSPORT CONFIGURATION ---");
+console.log("CLIENT ID:", process.env.GOOGLE_CLIENT_ID);
+console.log("CALLBACK URL FROM ENV:", process.env.GOOGLE_CALLBACK_URL);
+const effectiveCallbackURL = process.env.GOOGLE_CALLBACK_URL || `http://localhost:5000/api/auth/google/callback`;
+console.log("EFFECTIVE CALLBACK URL:", effectiveCallbackURL);
+console.log("----------------------------");
+// --- END DEBUGGING BLOCK ---
+
+
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.GOOGLE_CALLBACK_URL,
+      callbackURL: effectiveCallbackURL,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
