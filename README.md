@@ -165,7 +165,7 @@ To test the app or for reference, you can use the following user credentials:
 - **Email:** `ratul.9paul@gmail.com`
 - **Password:** `Broski@22`
 
-If you continue to have issues, try logging out and logging in again with
+If you continue to have issues, try logging out and logging in again 
 
 ## 👤 Author
 
@@ -176,4 +176,4 @@ If you continue to have issues, try logging out and logging in again with
 
 ## 📄 License
 
-This project is for demonstration and educational purposes only. Feel free to use the code as a reference or
+This project is for demonstration and educational purposes only. Feel free to use the code as a reference
