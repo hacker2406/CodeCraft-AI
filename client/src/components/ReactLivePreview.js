@@ -1,10 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 
-// Memoize the component to avoid rerendering unless 'code' changes
 const ReactLivePreview = React.memo(function ReactLivePreview({ code }) {
   const [copied, setCopied] = useState(false);
+  const previewRef = useRef(null);
+
+  useEffect(() => {
+    // Inject Tailwind CSS into the preview container
+    if (previewRef.current) {
+      const existingLink = previewRef.current.querySelector('link[href*="tailwindcss"]');
+      if (!existingLink) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdn.tailwindcss.com';
+        previewRef.current.appendChild(link);
+      }
+    }
+  }, []);
 
   const handleCopy = async () => {
     try {
@@ -19,7 +32,10 @@ const ReactLivePreview = React.memo(function ReactLivePreview({ code }) {
   return (
     <div className="my-2 border border-gray-700 rounded-lg overflow-hidden bg-black">
       <LiveProvider code={code} scope={{ React, useState }}>
-        <div className="p-2 bg-white text-black rounded-t max-h-[600px] overflow-auto">
+        <div 
+          ref={previewRef}
+          className="p-2 bg-white text-black rounded-t max-h-[600px] overflow-auto"
+        >
           <LivePreview />
         </div>
         <LiveError className="text-red-500 p-2" />
