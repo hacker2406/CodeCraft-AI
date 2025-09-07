@@ -25,7 +25,7 @@ export const chatWithLLM = async (req, res) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "meta-llama/llama-3.2-11b-vision-instruct:free", // or llama3, gemini, etc.
+        model: "openai/gpt-oss-20b:free", // or llama3, gemini, etc.
         messages,
         max_tokens: 4096,
       }),
